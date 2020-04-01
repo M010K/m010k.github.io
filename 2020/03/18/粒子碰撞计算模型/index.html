@@ -20,19 +20,21 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="粒子碰撞原理 动能守恒 动量守恒 碰撞时，相互作用力和碰撞点的切面垂直（假设没有摩擦力与自旋） 粒子为刚体  粒子属性1234private double rx, ry;      &#x2F;&#x2F; 粒子位置private double vx, vy;      &#x2F;&#x2F; 粒子速度private double radius;      &#x2F;&#x2F; 粒子半径private double mass;        &#x2F;&#x2F; 粒">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/04/01/hello-world/index.html">
+<meta property="og:title" content="粒子碰撞计算模型">
+<meta property="og:url" content="http://yoursite.com/2020/03/18/%E7%B2%92%E5%AD%90%E7%A2%B0%E6%92%9E%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="M010K">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="粒子碰撞原理 动能守恒 动量守恒 碰撞时，相互作用力和碰撞点的切面垂直（假设没有摩擦力与自旋） 粒子为刚体  粒子属性1234private double rx, ry;      &#x2F;&#x2F; 粒子位置private double vx, vy;      &#x2F;&#x2F; 粒子速度private double radius;      &#x2F;&#x2F; 粒子半径private double mass;        &#x2F;&#x2F; 粒">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-04-01T08:46:02.925Z">
-<meta property="article:modified_time" content="2020-04-01T09:26:52.645Z">
+<meta property="og:image" content="https://i.loli.net/2020/03/18/toTyAhwOeI1zluj.png">
+<meta property="article:published_time" content="2020-03-18T08:11:27.823Z">
+<meta property="article:modified_time" content="2020-04-01T03:10:45.854Z">
 <meta property="article:author" content="MingKai Luo">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/03/18/toTyAhwOeI1zluj.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/04/01/hello-world/">
+<link rel="canonical" href="http://yoursite.com/2020/03/18/%E7%B2%92%E5%AD%90%E7%A2%B0%E6%92%9E%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B/">
 
 
 <script id="page-configurations">
@@ -45,7 +47,7 @@
   };
 </script>
 
-  <title>Hello World | M010K</title>
+  <title>粒子碰撞计算模型 | M010K</title>
   
 
 
@@ -160,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/01/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/%E7%B2%92%E5%AD%90%E7%A2%B0%E6%92%9E%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png#/images/avatar.gif">
@@ -173,7 +175,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          粒子碰撞计算模型
         </h1>
 
         <div class="post-meta">
@@ -182,13 +184,19 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-04-01 16:46:02 / 修改时间：17:26:52" itemprop="dateCreated datePublished" datetime="2020-04-01T16:46:02+08:00">2020-04-01</time>
+              <time title="创建时间：2020-03-18 16:11:27" itemprop="dateCreated datePublished" datetime="2020-03-18T16:11:27+08:00">2020-03-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 11:10:45" itemprop="dateModified" datetime="2020-04-01T11:10:45+08:00">2020-04-01</time>
+              </span>
 
           
-            <span id="/2020/04/01/hello-world/" class="post-meta-item leancloud_visitors" data-flag-title="Hello World" title="阅读次数">
+            <span id="/2020/03/18/%E7%B2%92%E5%AD%90%E7%A2%B0%E6%92%9E%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="粒子碰撞计算模型" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -205,17 +213,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h1 id="粒子碰撞"><a href="#粒子碰撞" class="headerlink" title="粒子碰撞"></a>粒子碰撞</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
+<li>动能守恒</li>
+<li>动量守恒</li>
+<li>碰撞时，相互作用力和碰撞点的切面垂直（假设没有摩擦力与自旋）</li>
+<li>粒子为刚体</li>
+</ul>
+<h2 id="粒子属性"><a href="#粒子属性" class="headerlink" title="粒子属性"></a>粒子属性</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">double</span> rx, ry;      <span class="comment">// 粒子位置</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">double</span> vx, vy;      <span class="comment">// 粒子速度</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">double</span> radius;      <span class="comment">// 粒子半径</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">double</span> mass;        <span class="comment">// 粒子质量</span></span><br></pre></td></tr></table></figure>
+<h2 id="粒子与墙壁的碰撞"><a href="#粒子与墙壁的碰撞" class="headerlink" title="粒子与墙壁的碰撞"></a>粒子与墙壁的碰撞</h2><blockquote>
+<p>假设墙壁之间的距离为1，粒子沿直线前行，粒子半径为 $\sigma$</p>
+</blockquote>
 <script type="math/tex; mode=display">
-a + b = C</script>
+\text{与水平墙壁相碰撞的时间：} \Delta t=\left\{\begin{array}{cl}(1-\sigma-r y) / v y & \text { if } v y>0 \\(\sigma-r y) / v y & \text { if } v y<0 \\\infty & \text { if } v y=0\end{array}\right.</script><script type="math/tex; mode=display">
+\text{与竖直墙壁相碰撞的时间：} \Delta t=\left\{\begin{array}{cl}(1-\sigma-r x) / v x & \text { if } v x>0 \\(\sigma-r x) / v x & \text { if } v x<0 \\\infty & \text { if } v x=0\end{array}\right.</script><h2 id="粒子与粒子之间的碰撞"><a href="#粒子与粒子之间的碰撞" class="headerlink" title="粒子与粒子之间的碰撞"></a>粒子与粒子之间的碰撞</h2><blockquote>
+<p>由于2个以上粒子同时发生碰撞的情况比较复杂，且出现频率相对较低，故只考虑两个粒子发生碰撞的情况</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/03/18/toTyAhwOeI1zluj.png" alt="两个粒子碰撞.png"></p>
+<h3 id="碰撞预测"><a href="#碰撞预测" class="headerlink" title="碰撞预测"></a>碰撞预测</h3><ul>
+<li>Particle $i$:  半径 $\sigma_{i}$, 位置 ($rx_{i},ry{i}$), 速度 ($vx_{i},vy_{i}$). </li>
+<li>Particle $j$:  半径 $\sigma_{j}$, 位置 ($rx_{j},ry{j}$), 速度 ($vx_{j},vy_{j}$). </li>
+</ul>
+<p>粒子 i 和 j 经过$\Delta t$时间发生碰撞，记 $\sigma = \sigma_{i}+\sigma_{j}$，则有:</p>
+<script type="math/tex; mode=display">
+\sigma^{2}=\left(r x_{i}^{\prime}-r x_{j}^{\prime}\right)^{2}+\left(r y_{i}^{\prime}-r y_{j}^{\prime}\right)^{2}</script><p>又因为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&r x_{i}^{\prime}=r x_{i}+\Delta t v x_{i}, r y_{i}^{\prime}=r y_{i}+\Delta t v y_{i}\\
+&r x_{j}^{\prime}=r x_{j}+\Delta t v x_{j}, r y_{j}^{\prime}=r y_{j}+\Delta t v y_{j}
+\end{aligned}</script><p>则有碰撞时间预测：</p>
+<script type="math/tex; mode=display">
+\Delta t=\left\{\begin{array}{ll}
+\infty & \text { if } \Delta v \cdot \Delta r \geq 0 \\
+\infty & \text { if } d<0 \\
+-\frac{\Delta v \cdot \Delta r+\sqrt{d}}{\Delta v \cdot \Delta v} & \text { otherwise }
+\end{array}\right.\\
+d=(\Delta v \cdot \Delta r)^{2}-(\Delta v \cdot \Delta v)\left(\Delta r \cdot \Delta r-\sigma^{2}\right) \quad \sigma=\sigma_{i}+\sigma_{j}</script><script type="math/tex; mode=display">
+\begin{array}{ll}
+\Delta v=(\Delta v x, \Delta v y)=\left(v x_{i}-v x_{j}, v y_{i}-v y_{j}\right) & \Delta v \cdot \Delta v=(\Delta v x)^{2}+(\Delta v y)^{2} \\
+\Delta r=(\Delta r x, \Delta r y)=\left(r x_{i}-r x_{j}, r y_{i}-r y_{j}\right) & \Delta r \cdot \Delta r=(\Delta r x)^{2}+(\Delta r y)^{2} \\
+& \Delta v \cdot \Delta r=(\Delta v x)(\Delta r x)+(\Delta v y)(\Delta r y)
+\end{array}</script><h3 id="碰撞后粒子速度改变"><a href="#碰撞后粒子速度改变" class="headerlink" title="碰撞后粒子速度改变"></a>碰撞后粒子速度改变</h3><blockquote>
+<p>由牛顿第二定律，动能定理，动量定理</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&v x_{i}^{\prime}=v x_{i}+J x / m_{i}\\
+&v y_{i}^{\prime}=v y_{i}+J y / m_{i}\\
+&\begin{aligned}
+v x_{j}^{\prime} &=v x_{j}-J x / m_{j} \\
+v y_{j}^{\prime} &=v y_{j}-J y / m_{j}
+\end{aligned}
+\end{aligned}</script><p>其中：</p>
+<script type="math/tex; mode=display">
+J x=\frac{J \Delta r x}{\sigma}, J y=\frac{J \Delta r y}{\sigma}, J=\frac{2 m_{i} m_{j}(\Delta v \cdot \Delta r)}{\sigma\left(m_{i}+m_{j}\right)}</script>
     </div>
 
     
@@ -230,10 +280,13 @@ a + b = C</script>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/26/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="prev" title="背包问题">
-      <i class="fa fa-chevron-left"></i> 背包问题
+    <a href="/2020/03/17/%E7%89%9B%E9%A1%BF%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" rel="prev" title="牛顿法时间复杂度分析">
+      <i class="fa fa-chevron-left"></i> 牛顿法时间复杂度分析
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/19/%E5%AF%B9%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%E7%9A%84%E6%94%B9%E8%BF%9B/" rel="next" title="对优先队列的改进">
+      对优先队列的改进 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -292,7 +345,7 @@ a + b = C</script>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#粒子碰撞"><span class="nav-number">1.</span> <span class="nav-text">粒子碰撞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#粒子属性"><span class="nav-number">1.2.</span> <span class="nav-text">粒子属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#粒子与墙壁的碰撞"><span class="nav-number">1.3.</span> <span class="nav-text">粒子与墙壁的碰撞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#粒子与粒子之间的碰撞"><span class="nav-number">1.4.</span> <span class="nav-text">粒子与粒子之间的碰撞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#碰撞预测"><span class="nav-number">1.4.1.</span> <span class="nav-text">碰撞预测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#碰撞后粒子速度改变"><span class="nav-number">1.4.2.</span> <span class="nav-text">碰撞后粒子速度改变</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

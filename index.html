@@ -226,6 +226,497 @@ a + b = C</script>
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png#/images/avatar.gif">
+      <meta itemprop="name" content="MingKai Luo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M010K">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/26/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">背包问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-26 21:42:18" itemprop="dateCreated datePublished" datetime="2020-03-26T21:42:18+08:00">2020-03-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:26:32" itemprop="dateModified" datetime="2020-04-01T16:26:32+08:00">2020-04-01</time>
+              </span>
+
+          
+            <span id="/2020/03/26/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="背包问题" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="背包问题解法"><a href="#背包问题解法" class="headerlink" title="背包问题解法"></a>背包问题解法</h1><h2 id="问题提出"><a href="#问题提出" class="headerlink" title="问题提出"></a>问题提出</h2><p>背包问题。给定n个重量为 $w_{1},w_{2},\ldots,w_{n}$,价值为$v_{1},v_{2},\ldots,v_{n}$的物品和一个承重为W的背包，求将这些物品中的 某些装入背包中，在不超出重量W的情况下，价值最高的装法。</p>
+<h3 id="解法1——穷举法"><a href="#解法1——穷举法" class="headerlink" title="解法1——穷举法"></a>解法1——穷举法</h3><h4 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h4><p>通过递归完成对所有解的遍历，记录遍历过程中的最优解</p>
+<h4 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">4</span>;  <span class="comment">//物品个数</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> W = <span class="number">10</span>; <span class="comment">//背包的容量</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">commodity</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> weight; <span class="comment">//重量</span></span><br><span class="line">    <span class="keyword">int</span> value;  <span class="comment">//价值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> flag;</span><br><span class="line">&#125; commodity;</span><br><span class="line"></span><br><span class="line">commodity goods[N] = &#123;&#123;<span class="number">7</span>, <span class="number">42</span>, <span class="number">0</span>&#125;, &#123;<span class="number">3</span>, <span class="number">12</span>, <span class="number">0</span>&#125;, &#123;<span class="number">4</span>, <span class="number">40</span>, <span class="number">0</span>&#125;, &#123;<span class="number">5</span>, <span class="number">25</span>, <span class="number">0</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">int</span> r[N + <span class="number">1</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> sum_w = <span class="number">0</span>, sum_v = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">record</span><span class="params">(<span class="keyword">int</span> sum_v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    r[<span class="number">0</span>] = sum_v;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (goods[i].flag)</span><br><span class="line">            r[++count] = i + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">knaps</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sum_w &gt; W)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (sum_v &gt; r[<span class="number">0</span>])</span><br><span class="line">        ans = record(sum_v);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum_v += goods[i].value;</span><br><span class="line">        sum_w += goods[i].weight;</span><br><span class="line">        goods[i].flag = <span class="number">1</span>;</span><br><span class="line">        knaps(i + <span class="number">1</span>);</span><br><span class="line">        sum_v -= goods[i].value;</span><br><span class="line">        sum_w -= goods[i].weight;</span><br><span class="line">        goods[i].flag = <span class="number">0</span>;</span><br><span class="line">        r[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    knaps(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"有"</span> &lt;&lt; ans &lt;&lt; <span class="string">"个物品被选中了"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"max value is:"</span> &lt;&lt; r[<span class="number">0</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h4><script type="math/tex; mode=display">
+f(n)=\begin{cases}nf(n-1) +C & \text{n > 1}
+\\ 1 & \text{n=1}    \end{cases}</script><p>可得：</p>
+<script type="math/tex; mode=display">
+f(n) = \Theta(n!)</script><h4 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd7r5tb858j30bq02e74g.jpg" alt="屏幕快照 2020-03-26 下午11.32.50"></p>
+<h3 id="解法2——动态规划"><a href="#解法2——动态规划" class="headerlink" title="解法2——动态规划"></a>解法2——动态规划</h3><h4 id="计算模型"><a href="#计算模型" class="headerlink" title="计算模型"></a>计算模型</h4><p>定义价值函数 $P(i,W)$：在 $i$件物品中选择总重量不超过 $W$的物品装入背包，记此时使得背包总价值最大的取值为：$m(i,W),\quad 1 \leq i \leq n, \quad 1 \leq W \leq C$</p>
+<p>对于第 $i$个物品，存在两种情况：</p>
+<ul>
+<li>不选，背包容量仍然为 $W$，问题变为 $P=(i-1,W)$</li>
+<li>选，背包容量变小，问题变为 $P(i-1,W-w_{i})$</li>
+</ul>
+<p>则，$m(i,W) = \max{\{ m(i-1,W),m(i-1,W-w_{i})+v_{i} \}}$</p>
+<script type="math/tex; mode=display">
+m(i, W)=\left\{\begin{array}{ll}0 & \text { if } i=0 \\ 0 & \text { if } W=0 \\ m(i-1, W) & \text { if } w_{i}>W \\ \max \left\{m(i-1, W), m\left(i-1, W-w_{i}\right)+v_{i}\right\} & \text { otherwise }\end{array}\right.</script><h4 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">4</span>;  <span class="comment">//物品个数</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> W = <span class="number">10</span>; <span class="comment">//背包的容量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//初始物品信息</span></span><br><span class="line"><span class="keyword">int</span> m[N + <span class="number">1</span>][W + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// n为物品数，W为背包容量，w[]、v[]分别为每个物品的重量与价值</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DP_Knapsac</span><span class="params">(<span class="keyword">int</span> w[], <span class="keyword">int</span> v[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, weight;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt;= W; i++)</span><br><span class="line">        m[<span class="number">0</span>][i] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= N; i++)</span><br><span class="line">        m[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (weight = <span class="number">1</span>; weight &lt;= W; weight++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (w[i] &gt; weight)</span><br><span class="line">                m[i][weight] = m[i - <span class="number">1</span>][weight];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                m[i][weight] = <span class="built_in">max</span>(m[i - <span class="number">1</span>][weight], m[i - <span class="number">1</span>][weight - w[i]] + v[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Selected_Item</span><span class="params">(<span class="keyword">int</span> w[], <span class="keyword">int</span> v[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> remainspace = W;</span><br><span class="line">    <span class="comment">//输出所选择的物品列表：</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = N; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (remainspace &gt;= w[i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((m[i][remainspace] - m[i - <span class="number">1</span>][remainspace - w[i]] == v[i]))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"item of "</span> &lt;&lt; w[i] &lt;&lt; <span class="string">"kg"</span></span><br><span class="line">                     &lt;&lt; <span class="string">" is selected"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                remainspace = remainspace - w[i]; <span class="comment">//如果第i个物品被选择，那么背包剩余容量将减去第i个物品的重量 ;             &#125;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> w[<span class="number">5</span>] = &#123;<span class="number">0</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> v[<span class="number">5</span>] = &#123;<span class="number">0</span>, <span class="number">42</span>, <span class="number">12</span>, <span class="number">40</span>, <span class="number">25</span>&#125;;</span><br><span class="line">    DP_Knapsac(w, v);</span><br><span class="line">    Selected_Item(w, v);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="时间复杂度分析-1"><a href="#时间复杂度分析-1" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h4><p>求解函数DP_Knapsac的主要内容为两层for循环，则:</p>
+<script type="math/tex; mode=display">
+T(n) = \sum_{1}^{N}\sum_{1}^{W}C = O(N*W)</script><p>其中，N为物体总件数，W为背包总容量</p>
+<h4 id="运行结果-1"><a href="#运行结果-1" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd7q2zkimcj30ew02odg1.jpg" alt="屏幕快照 2020-03-26 下午10.43.09"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png#/images/avatar.gif">
+      <meta itemprop="name" content="MingKai Luo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M010K">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">动态规划问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-26 21:42:11" itemprop="dateCreated datePublished" datetime="2020-03-26T21:42:11+08:00">2020-03-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 00:17:49" itemprop="dateModified" datetime="2020-04-01T00:17:49+08:00">2020-04-01</time>
+              </span>
+
+          
+            <span id="/2020/03/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="动态规划问题" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="钢条切割"><a href="#钢条切割" class="headerlink" title="钢条切割"></a>钢条切割</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><blockquote>
+<p>钢条切割问题是这样的：给定一段长度为n英寸的钢条和一个价格表 $p_{i} (i=1,2,\ldots,n)$ ，求切割钢条方案，使得销售$r_{n}$收益最大。注意，如果长度为n英寸的钢条的价格$p_{n}$足够大，最优解可能就是完全不需要切割</p>
+</blockquote>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Memorized_Cut_Rod_Aux</span><span class="params">(<span class="keyword">int</span> p[], <span class="keyword">int</span> n, <span class="keyword">int</span> r[])</span>  <span class="comment">// “备忘”递归</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (r[n] &gt;= <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> r[n];</span><br><span class="line">    <span class="keyword">int</span> profit = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>)</span><br><span class="line">        profit = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        profit = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            profit = <span class="built_in">max</span>(profit, p[i] + Memorized_Cut_Rod_Aux(p, n - i, r));</span><br><span class="line">    &#125;</span><br><span class="line">    r[n] = profit;</span><br><span class="line">    <span class="keyword">return</span> r[n];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Bottom_Up_Rod</span><span class="params">(<span class="keyword">int</span> p[], <span class="keyword">int</span> n)</span>		<span class="comment">// 自底向上</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> r[n];</span><br><span class="line">    <span class="built_in">memset</span>(r, <span class="number">0</span>, <span class="keyword">sizeof</span>(r));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> profit = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= j; i++)</span><br><span class="line">            profit = <span class="built_in">max</span>(profit, p[i] + p[j - i]);</span><br><span class="line">        r[j] = profit;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r[n];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p[<span class="number">11</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">17</span>, <span class="number">17</span>, <span class="number">20</span>, <span class="number">24</span>, <span class="number">30</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> r[<span class="number">50</span>];</span><br><span class="line">    <span class="built_in">memset</span>(r, <span class="number">-1</span>, <span class="keyword">sizeof</span>(r));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Memorized_Cut_Rod_Aux(p, <span class="number">10</span>, r) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Bottom_Up_Rod(p, <span class="number">10</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p>下面给出的是 BOTTOM-UP-CUT- ROD的扩展版本，它对长度为 j 的钢条不仅计算最大收益值$r_{j}$，还保存最优解对应的第一段钢条的切割长度$s_{j}$：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Extented_Bottom_Up_Rod</span><span class="params">(<span class="keyword">int</span> p[], <span class="keyword">int</span> n, <span class="keyword">int</span> *r, <span class="keyword">int</span> *s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    r[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> profit = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= j; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (profit &lt; p[i] + p[j - i])</span><br><span class="line">            &#123;</span><br><span class="line">                profit = p[i] + p[j - i];</span><br><span class="line">                s[j] = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        r[j] = profit;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><blockquote>
+<p>自底向上与“备忘”递归两种方法的时间复杂度同阶，自底向上的方法由于没有递归的消耗，在常数因子上优于“自底向上”的方法</p>
+</blockquote>
+<p>两种方法的时间复杂度均为：$T(n) = \Theta(n^{2})$</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/19/%E5%AF%B9%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%E7%9A%84%E6%94%B9%E8%BF%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png#/images/avatar.gif">
+      <meta itemprop="name" content="MingKai Luo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M010K">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/19/%E5%AF%B9%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%E7%9A%84%E6%94%B9%E8%BF%9B/" class="post-title-link" itemprop="url">对优先队列的改进</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-19 09:28:49" itemprop="dateCreated datePublished" datetime="2020-03-19T09:28:49+08:00">2020-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 00:13:18" itemprop="dateModified" datetime="2020-04-01T00:13:18+08:00">2020-04-01</time>
+              </span>
+
+          
+            <span id="/2020/03/19/%E5%AF%B9%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%E7%9A%84%E6%94%B9%E8%BF%9B/" class="post-meta-item leancloud_visitors" data-flag-title="对优先队列的改进" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="优先队列改进"><a href="#优先队列改进" class="headerlink" title="优先队列改进"></a>优先队列改进</h1><h2 id="1-对sink和swim方法的改善"><a href="#1-对sink和swim方法的改善" class="headerlink" title="1.对sink和swim方法的改善"></a>1.对sink和swim方法的改善</h2><p>主要是将元素的交换改为直接赋值，减少操作步数，在数据量较大的时候对性能有一定的提高</p>
+<ul>
+<li>原始操作，交换两元素</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swim</span><span class="params">(<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (k &gt; <span class="number">1</span> &amp;&amp; greater(k/<span class="number">2</span>, k))</span><br><span class="line">    &#123;</span><br><span class="line">        exch(k, k/<span class="number">2</span>);</span><br><span class="line">        k = k / <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>优化后</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swim</span><span class="params">(<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pq[<span class="number">0</span>] = pq[k];</span><br><span class="line">    <span class="keyword">while</span> (k &gt; <span class="number">1</span> &amp;&amp; greater(k/<span class="number">2</span>, <span class="number">0</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        pq[k] = pq[k/<span class="number">2</span>];</span><br><span class="line">        k = k / <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pq[k] = pq[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>原始操作，交换两元素</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sink</span><span class="params">(<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">2</span>*k &lt;= n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">2</span>*k;</span><br><span class="line">        <span class="keyword">if</span> (j &lt; n &amp;&amp; greater(j, j+<span class="number">1</span>)) j++;</span><br><span class="line">        <span class="keyword">if</span> (!greater(k, j)) <span class="keyword">break</span>;</span><br><span class="line">        exch(k, j);</span><br><span class="line">        k = j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>优化后</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sink</span><span class="params">(<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pq[<span class="number">0</span>] = pq[k];</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">2</span>*k &lt;= n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">2</span>*k;</span><br><span class="line">        <span class="keyword">if</span> (j &lt; n &amp;&amp; greater(j, j+<span class="number">1</span>)) j++;</span><br><span class="line">        <span class="keyword">if</span> (!greater(<span class="number">0</span>, j)) <span class="keyword">break</span>;</span><br><span class="line">        pq[k] = pq[j];</span><br><span class="line">        k = j;</span><br><span class="line">    &#125;</span><br><span class="line">    pq[k] = pq[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/%E7%B2%92%E5%AD%90%E7%A2%B0%E6%92%9E%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png#/images/avatar.gif">
+      <meta itemprop="name" content="MingKai Luo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M010K">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/18/%E7%B2%92%E5%AD%90%E7%A2%B0%E6%92%9E%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">粒子碰撞计算模型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-18 16:11:27" itemprop="dateCreated datePublished" datetime="2020-03-18T16:11:27+08:00">2020-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 11:10:45" itemprop="dateModified" datetime="2020-04-01T11:10:45+08:00">2020-04-01</time>
+              </span>
+
+          
+            <span id="/2020/03/18/%E7%B2%92%E5%AD%90%E7%A2%B0%E6%92%9E%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="粒子碰撞计算模型" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="粒子碰撞"><a href="#粒子碰撞" class="headerlink" title="粒子碰撞"></a>粒子碰撞</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
+<li>动能守恒</li>
+<li>动量守恒</li>
+<li>碰撞时，相互作用力和碰撞点的切面垂直（假设没有摩擦力与自旋）</li>
+<li>粒子为刚体</li>
+</ul>
+<h2 id="粒子属性"><a href="#粒子属性" class="headerlink" title="粒子属性"></a>粒子属性</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">double</span> rx, ry;      <span class="comment">// 粒子位置</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">double</span> vx, vy;      <span class="comment">// 粒子速度</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">double</span> radius;      <span class="comment">// 粒子半径</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">double</span> mass;        <span class="comment">// 粒子质量</span></span><br></pre></td></tr></table></figure>
+<h2 id="粒子与墙壁的碰撞"><a href="#粒子与墙壁的碰撞" class="headerlink" title="粒子与墙壁的碰撞"></a>粒子与墙壁的碰撞</h2><blockquote>
+<p>假设墙壁之间的距离为1，粒子沿直线前行，粒子半径为 $\sigma$</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\text{与水平墙壁相碰撞的时间：} \Delta t=\left\{\begin{array}{cl}(1-\sigma-r y) / v y & \text { if } v y>0 \\(\sigma-r y) / v y & \text { if } v y<0 \\\infty & \text { if } v y=0\end{array}\right.</script><script type="math/tex; mode=display">
+\text{与竖直墙壁相碰撞的时间：} \Delta t=\left\{\begin{array}{cl}(1-\sigma-r x) / v x & \text { if } v x>0 \\(\sigma-r x) / v x & \text { if } v x<0 \\\infty & \text { if } v x=0\end{array}\right.</script><h2 id="粒子与粒子之间的碰撞"><a href="#粒子与粒子之间的碰撞" class="headerlink" title="粒子与粒子之间的碰撞"></a>粒子与粒子之间的碰撞</h2><blockquote>
+<p>由于2个以上粒子同时发生碰撞的情况比较复杂，且出现频率相对较低，故只考虑两个粒子发生碰撞的情况</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/03/18/toTyAhwOeI1zluj.png" alt="两个粒子碰撞.png"></p>
+<h3 id="碰撞预测"><a href="#碰撞预测" class="headerlink" title="碰撞预测"></a>碰撞预测</h3><ul>
+<li>Particle $i$:  半径 $\sigma_{i}$, 位置 ($rx_{i},ry{i}$), 速度 ($vx_{i},vy_{i}$). </li>
+<li>Particle $j$:  半径 $\sigma_{j}$, 位置 ($rx_{j},ry{j}$), 速度 ($vx_{j},vy_{j}$). </li>
+</ul>
+<p>粒子 i 和 j 经过$\Delta t$时间发生碰撞，记 $\sigma = \sigma_{i}+\sigma_{j}$，则有:</p>
+<script type="math/tex; mode=display">
+\sigma^{2}=\left(r x_{i}^{\prime}-r x_{j}^{\prime}\right)^{2}+\left(r y_{i}^{\prime}-r y_{j}^{\prime}\right)^{2}</script><p>又因为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&r x_{i}^{\prime}=r x_{i}+\Delta t v x_{i}, r y_{i}^{\prime}=r y_{i}+\Delta t v y_{i}\\
+&r x_{j}^{\prime}=r x_{j}+\Delta t v x_{j}, r y_{j}^{\prime}=r y_{j}+\Delta t v y_{j}
+\end{aligned}</script><p>则有碰撞时间预测：</p>
+<script type="math/tex; mode=display">
+\Delta t=\left\{\begin{array}{ll}
+\infty & \text { if } \Delta v \cdot \Delta r \geq 0 \\
+\infty & \text { if } d<0 \\
+-\frac{\Delta v \cdot \Delta r+\sqrt{d}}{\Delta v \cdot \Delta v} & \text { otherwise }
+\end{array}\right.\\
+d=(\Delta v \cdot \Delta r)^{2}-(\Delta v \cdot \Delta v)\left(\Delta r \cdot \Delta r-\sigma^{2}\right) \quad \sigma=\sigma_{i}+\sigma_{j}</script><script type="math/tex; mode=display">
+\begin{array}{ll}
+\Delta v=(\Delta v x, \Delta v y)=\left(v x_{i}-v x_{j}, v y_{i}-v y_{j}\right) & \Delta v \cdot \Delta v=(\Delta v x)^{2}+(\Delta v y)^{2} \\
+\Delta r=(\Delta r x, \Delta r y)=\left(r x_{i}-r x_{j}, r y_{i}-r y_{j}\right) & \Delta r \cdot \Delta r=(\Delta r x)^{2}+(\Delta r y)^{2} \\
+& \Delta v \cdot \Delta r=(\Delta v x)(\Delta r x)+(\Delta v y)(\Delta r y)
+\end{array}</script><h3 id="碰撞后粒子速度改变"><a href="#碰撞后粒子速度改变" class="headerlink" title="碰撞后粒子速度改变"></a>碰撞后粒子速度改变</h3><blockquote>
+<p>由牛顿第二定律，动能定理，动量定理</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&v x_{i}^{\prime}=v x_{i}+J x / m_{i}\\
+&v y_{i}^{\prime}=v y_{i}+J y / m_{i}\\
+&\begin{aligned}
+v x_{j}^{\prime} &=v x_{j}-J x / m_{j} \\
+v y_{j}^{\prime} &=v y_{j}-J y / m_{j}
+\end{aligned}
+\end{aligned}</script><p>其中：</p>
+<script type="math/tex; mode=display">
+J x=\frac{J \Delta r x}{\sigma}, J y=\frac{J \Delta r y}{\sigma}, J=\frac{2 m_{i} m_{j}(\Delta v \cdot \Delta r)}{\sigma\left(m_{i}+m_{j}\right)}</script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/%E7%89%9B%E9%A1%BF%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png#/images/avatar.gif">
+      <meta itemprop="name" content="MingKai Luo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M010K">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/17/%E7%89%9B%E9%A1%BF%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">牛顿法时间复杂度分析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-17 18:37:53" itemprop="dateCreated datePublished" datetime="2020-03-17T18:37:53+08:00">2020-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 00:18:08" itemprop="dateModified" datetime="2020-04-01T00:18:08+08:00">2020-04-01</time>
+              </span>
+
+          
+            <span id="/2020/03/17/%E7%89%9B%E9%A1%BF%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" class="post-meta-item leancloud_visitors" data-flag-title="牛顿法时间复杂度分析" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>设$y=f(x)$有反函数$x=g(y)$，则在$f(x)=0$的根$a$的邻域内，$g(y)$ 关于点$y_{i}=f(x_{i})$的$Taylor$展开式为:</p>
+<script type="math/tex; mode=display">
+x=g(y)=\sum_{j=0}^{m+1} \frac{\left(y-y_{i}\right)^{j}}{j !} g^{j}\left(y_{i}\right)+\frac{\left(y-y_{i}\right)^{m+2}}{(m+2) !} g^{(m+2)}\left(\eta_{i}\right)</script><p>其中， $\eta_{i}$ 是介于 $y$ 与$y_{i}$ 之间</p>
+<p>因为$a=g(0)$，所以得：</p>
+<script type="math/tex; mode=display">
+a=x_{i}+\sum_{j=1}^{m+1} \frac{(-1)^{j}\left[f\left(x_{i}\right)\right]^{j}}{j!} g^{j}\left(y_{i}\right)+\frac{(-1)^{m+2}}{(m+2) !}\left[f\left(x_{i}\right)\right]^{m+2} g^{(m+2)}\left(\eta_{i}\right)\tag{1}</script><script type="math/tex; mode=display">
+a \approx x_{i}-\frac{f\left(x_{i}\right)}{f^{\prime}\left(x_{i}\right)}+\sum_{j=2}^{m+1} \frac{(-1)^{j}\left[f\left(x_{i}\right)\right]^{j}}{j !} g^{j}\left(y_{i}\right)\tag{2}\qquad\qquad\qquad\qquad\qquad</script><script type="math/tex; mode=display">
+x_{i+1}=x_{i}-\frac{f\left(x_{i}\right)}{f^{\prime}\left(x_{i}\right)}+\sum_{j=2}^{m+1} \frac{(-1)^{j}\left[f\left(x_{i}\right)\right]^{j}}{j !} g^{j}\left(y_{i}\right)\tag{3}\qquad\qquad\qquad\qquad\quad</script><p>由式(1)与式(3)可得，式(3)的收敛阶为:</p>
+<script type="math/tex; mode=display">
+\left|\varepsilon_{i+1}\right|=\frac{1}{(m+2) !}\left|f\left(x_{i}\right)\right|^{m+2}\left|g^{(m+2)}\left(\eta_{i}\right)\right|\tag{4}</script><p>注意到：</p>
+<script type="math/tex; mode=display">
+\varepsilon_{i} = a - x^{i} \\
+ f(a) = 0  \\</script><script type="math/tex; mode=display">
+\because f(x)在\left|a - x_{i}\right| 连续, 由拉格朗日中值定理 \qquad\quad\ \ \\
+\therefore \left| f(x_{i})-f(x^{*}) \right|=\left| f^{\prime}(\xi_{i})  \varepsilon_{i}\right| \quad  (\xi_{i}\in\left|a - x_{i}\right|)</script><p>可以将式(4)化为:</p>
+<script type="math/tex; mode=display">
+\left|\varepsilon_{i+1}\right|=\frac{1}{(m+2) !}\left|f^{\prime}\left(\xi_{i}\right)\right|^{m+2}\left|g^{(m+2)}\left(\eta_{i}\right)\right|\left|\varepsilon_{i}\right|^{m+2}\tag{5}</script><p>若a是单根，则当$\left|f^{\prime}\left(\xi_{i}\right)\right|^{m+2}\left|g^{(m+2)}\left(\eta_{i}\right)\right|$在a的某邻域内是有界的，且当$i \rightarrow+\infty$时,</p>
+<script type="math/tex; mode=display">
+\xi_{i} \rightarrow a, \quad \eta_{i} \rightarrow 0​</script><p>所以:</p>
+<script type="math/tex; mode=display">
+\lim _{i \rightarrow \infty} \frac{\left|\varepsilon_{i+1}\right|}{\left|\varepsilon_{i}\right|^{m+2}}=\frac{1}{(m+2) !}|f(\mathrm{a})|^{m+2}\left|g^{(m+2)}(0)\right| = C \neq 0</script><p>由定义3.2：</p>
+<blockquote>
+<p>设$\varepsilon_{k}=x*-xk$为第k次迭代的迭代误差，若</p>
+<script type="math/tex; mode=display">
+\lim _{k \rightarrow \infty} \frac{\left|\varepsilon_{k+1}\right|}{\left|\varepsilon_{k}\right|^{p}}=c \neq 0</script><p>则称迭代是p阶收敛的。称c为渐近误差常数</p>
+</blockquote>
+<p>可得：牛顿法的收敛阶为 <strong>$p = m + 2$</strong></p>
+<p>如果设$f(x_{i})$的计算量为1个单位，则计算$f^{(j)}(x_{i})$的计算量设为 $\theta_{j}$，则式子(3)的计算量为:</p>
+<script type="math/tex; mode=display">
+\theta=1+\sum_{j=1}^{m+1} \theta_{j}</script><p>式子(3)的效率指数为：</p>
+<script type="math/tex; mode=display">
+\mathrm{EI}=\mathrm{p}^{\frac{1}{\theta}}=(m+2)^{1 /\left(1+\sum_{j=1}^{m+1} \theta_{j}\right)}</script><p>注意到其中只利用到f(x)的一阶导数  $\therefore m = 0$</p>
+<p>对比牛顿迭代公式(4)，可得到:</p>
+<script type="math/tex; mode=display">
+\lim _{i \rightarrow \infty} \frac{\left|\varepsilon_{i+1}\right|}{\left|\varepsilon_{i}\right|^{2}}=\frac{1}{2}|f(a)|^{2}\left|g^{(2)}(0)\right|</script><p>效率指数为:</p>
+<script type="math/tex; mode=display">
+E I=2^{\frac{1}{1+\theta_{1}}}</script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
 
@@ -294,7 +785,7 @@ a + b = C</script>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
