@@ -474,7 +474,6 @@ J x=\frac{J \Delta r x}{\sigma}, J y=\frac{J \Delta r y}{\sigma}, J=\frac{2 m_{i
       var title = visitors.dataset.flagTitle;
 
       Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
-      # Counter('get', `/classes/Counter?where=${encodeURIComponent(JSON.stringify({ url }))}&limit=1`)
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length > 0) {
@@ -507,8 +506,6 @@ J x=\frac{J \Delta r x}{\sigma}, J y=\frac{J \Delta r y}{\sigma}, J=\frac{2 m_{i
       });
 
       Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
-      # Counter('get', `?where=${encodeURIComponent(JSON.stringify({ url: { '$in': entries } }))}`)
-
         .then(response => response.json())
         .then(({ results }) => {
           for (let url of entries) {
