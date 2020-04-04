@@ -12,3 +12,4 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 Sitemap: https://mkco.xyz/sitemap.xml
+Sitemap: https://mkco.xyz/baidusitemap.xml
