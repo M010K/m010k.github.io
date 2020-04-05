@@ -11,5 +11,5 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
-Sitemap: https://mkco.xyz/sitemap.xml
-Sitemap: https://mkco.xyz/baidusitemap.xml
+Sitemap: http://mkco.xyz/sitemap.xml
+Sitemap: http://mkco.xyz/baidusitemap.xml
