@@ -23,20 +23,26 @@
     var CONFIG = {"hostname":"mkco.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="对牛顿迭代法时间复杂度以及效率指数的分析">
+  <meta name="description" content="为博客绑定域名后，解决Google域名验证的问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="牛顿法时间复杂度分析">
-<meta property="og:url" content="http://mkco.xyz/2020/03/17/%E7%89%9B%E9%A1%BF%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/index.html">
+<meta property="og:title" content="Hexo设置&#x2F;Google站点收录的问题">
+<meta property="og:url" content="http://mkco.xyz/2020/04/05/Hexo%E8%AE%BE%E7%BD%AE/Google%E7%AB%99%E7%82%B9%E6%94%B6%E5%BD%95%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="M010K">
-<meta property="og:description" content="对牛顿迭代法时间复杂度以及效率指数的分析">
+<meta property="og:description" content="为博客绑定域名后，解决Google域名验证的问题">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-17T10:37:53.376Z">
-<meta property="article:modified_time" content="2020-04-02T05:01:23.617Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200405-GoogleConsoleSearch%E9%AA%8C%E8%AF%811.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200405-GoogleConsoleSearch%E9%AA%8C%E8%AF%81.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200405-20200405-%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E7%95%8C%E9%9D%A2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200405-%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%AE%BE%E7%BD%AE.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200405-%E9%98%BF%E9%87%8C%E4%BA%91%E6%B7%BB%E5%8A%A0%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%AE%B0%E5%BD%95.png">
+<meta property="article:published_time" content="2020-04-05T06:07:29.582Z">
+<meta property="article:modified_time" content="2020-04-05T07:19:36.405Z">
 <meta property="article:author" content="MingKai Luo">
-<meta property="article:tag" content="Algorithm">
+<meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200405-GoogleConsoleSearch%E9%AA%8C%E8%AF%811.png">
 
-<link rel="canonical" href="http://mkco.xyz/2020/03/17/%E7%89%9B%E9%A1%BF%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">
+<link rel="canonical" href="http://mkco.xyz/2020/04/05/Hexo%E8%AE%BE%E7%BD%AE/Google%E7%AB%99%E7%82%B9%E6%94%B6%E5%BD%95%E7%9A%84%E9%97%AE%E9%A2%98/">
 
 
 <script id="page-configurations">
@@ -49,7 +55,7 @@
   };
 </script>
 
-  <title>牛顿法时间复杂度分析 | M010K</title>
+  <title>Hexo设置/Google站点收录的问题 | M010K</title>
   
 
 
@@ -169,7 +175,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://mkco.xyz/2020/03/17/%E7%89%9B%E9%A1%BF%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://mkco.xyz/2020/04/05/Hexo%E8%AE%BE%E7%BD%AE/Google%E7%AB%99%E7%82%B9%E6%94%B6%E5%BD%95%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -182,7 +188,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          牛顿法时间复杂度分析
+          Hexo设置/Google站点收录的问题
         </h1>
 
         <div class="post-meta">
@@ -191,28 +197,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-03-17 18:37:53" itemprop="dateCreated datePublished" datetime="2020-03-17T18:37:53+08:00">2020-03-17</time>
+              <time title="创建时间：2020-04-05 14:07:29 / 修改时间：15:19:36" itemprop="dateCreated datePublished" datetime="2020-04-05T14:07:29+08:00">2020-04-05</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-02 13:01:23" itemprop="dateModified" datetime="2020-04-02T13:01:23+08:00">2020-04-02</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                  <a href="/categories/Hexo%E8%AE%BE%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">Hexo设置</span></a>
                 </span>
             </span>
 
           
-            <span id="/2020/03/17/%E7%89%9B%E9%A1%BF%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" class="post-meta-item leancloud_visitors" data-flag-title="牛顿法时间复杂度分析" title="阅读次数">
+            <span id="/2020/04/05/Hexo%E8%AE%BE%E7%BD%AE/Google%E7%AB%99%E7%82%B9%E6%94%B6%E5%BD%95%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo设置/Google站点收录的问题" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -227,8 +227,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/17/%E7%89%9B%E9%A1%BF%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/17/%E7%89%9B%E9%A1%BF%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/04/05/Hexo%E8%AE%BE%E7%BD%AE/Google%E7%AB%99%E7%82%B9%E6%94%B6%E5%BD%95%E7%9A%84%E9%97%AE%E9%A2%98/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/05/Hexo%E8%AE%BE%E7%BD%AE/Google%E7%AB%99%E7%82%B9%E6%94%B6%E5%BD%95%E7%9A%84%E9%97%AE%E9%A2%98/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -238,16 +238,16 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
+              <span>720</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
-            <div class="post-description">对牛顿迭代法时间复杂度以及效率指数的分析</div>
+            <div class="post-description">为博客绑定域名后，解决Google域名验证的问题</div>
 
         </div>
       </header>
@@ -258,43 +258,63 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>设$y=f(x)$有反函数$x=g(y)$，则在$f(x)=0$的根$a$的邻域内，$g(y)$ 关于点$y_{i}=f(x_{i})$的$Taylor$展开式为:</p>
-<script type="math/tex; mode=display">
-x=g(y)=\sum_{j=0}^{m+1} \frac{\left(y-y_{i}\right)^{j}}{j !} g^{j}\left(y_{i}\right)+\frac{\left(y-y_{i}\right)^{m+2}}{(m+2) !} g^{(m+2)}\left(\eta_{i}\right)</script><p>其中， $\eta_{i}$ 是介于 $y$ 与$y_{i}$ 之间</p>
-<p>因为$a=g(0)$，所以得：</p>
-<script type="math/tex; mode=display">
-a=x_{i}+\sum_{j=1}^{m+1} \frac{(-1)^{j}\left[f\left(x_{i}\right)\right]^{j}}{j!} g^{j}\left(y_{i}\right)+\frac{(-1)^{m+2}}{(m+2) !}\left[f\left(x_{i}\right)\right]^{m+2} g^{(m+2)}\left(\eta_{i}\right)\tag{1}</script><script type="math/tex; mode=display">
-a \approx x_{i}-\frac{f\left(x_{i}\right)}{f^{\prime}\left(x_{i}\right)}+\sum_{j=2}^{m+1} \frac{(-1)^{j}\left[f\left(x_{i}\right)\right]^{j}}{j !} g^{j}\left(y_{i}\right)\tag{2}\qquad\qquad\qquad\qquad\qquad</script><script type="math/tex; mode=display">
-x_{i+1}=x_{i}-\frac{f\left(x_{i}\right)}{f^{\prime}\left(x_{i}\right)}+\sum_{j=2}^{m+1} \frac{(-1)^{j}\left[f\left(x_{i}\right)\right]^{j}}{j !} g^{j}\left(y_{i}\right)\tag{3}\qquad\qquad\qquad\qquad\quad</script><p>由式(1)与式(3)可得，式(3)的收敛阶为:</p>
-<script type="math/tex; mode=display">
-\left|\varepsilon_{i+1}\right|=\frac{1}{(m+2) !}\left|f\left(x_{i}\right)\right|^{m+2}\left|g^{(m+2)}\left(\eta_{i}\right)\right|\tag{4}</script><p>注意到：</p>
-<script type="math/tex; mode=display">
-\varepsilon_{i} = a - x^{i} \\
- f(a) = 0  \\</script><script type="math/tex; mode=display">
-\because f(x)在\left|a - x_{i}\right| 连续, 由拉格朗日中值定理 \qquad\quad\ \ \\
-\therefore \left| f(x_{i})-f(x^{*}) \right|=\left| f^{\prime}(\xi_{i})  \varepsilon_{i}\right| \quad  (\xi_{i}\in\left|a - x_{i}\right|)</script><p>可以将式(4)化为:</p>
-<script type="math/tex; mode=display">
-\left|\varepsilon_{i+1}\right|=\frac{1}{(m+2) !}\left|f^{\prime}\left(\xi_{i}\right)\right|^{m+2}\left|g^{(m+2)}\left(\eta_{i}\right)\right|\left|\varepsilon_{i}\right|^{m+2}\tag{5}</script><p>若a是单根，则当$\left|f^{\prime}\left(\xi_{i}\right)\right|^{m+2}\left|g^{(m+2)}\left(\eta_{i}\right)\right|$在a的某邻域内是有界的，且当$i \rightarrow+\infty$时,</p>
-<script type="math/tex; mode=display">
-\xi_{i} \rightarrow a, \quad \eta_{i} \rightarrow 0​</script><p>所以:</p>
-<script type="math/tex; mode=display">
-\lim _{i \rightarrow \infty} \frac{\left|\varepsilon_{i+1}\right|}{\left|\varepsilon_{i}\right|^{m+2}}=\frac{1}{(m+2) !}|f(\mathrm{a})|^{m+2}\left|g^{(m+2)}(0)\right| = C \neq 0</script><p>由定义3.2：</p>
-<blockquote>
-<p>设$\varepsilon_{k}=x*-xk$为第k次迭代的迭代误差，若</p>
-<script type="math/tex; mode=display">
-\lim _{k \rightarrow \infty} \frac{\left|\varepsilon_{k+1}\right|}{\left|\varepsilon_{k}\right|^{p}}=c \neq 0</script><p>则称迭代是p阶收敛的。称c为渐近误差常数</p>
-</blockquote>
-<p>可得：牛顿法的收敛阶为 <strong>$p = m + 2$</strong></p>
-<p>如果设$f(x_{i})$的计算量为1个单位，则计算$f^{(j)}(x_{i})$的计算量设为 $\theta_{j}$，则式子(3)的计算量为:</p>
-<script type="math/tex; mode=display">
-\theta=1+\sum_{j=1}^{m+1} \theta_{j}</script><p>式子(3)的效率指数为：</p>
-<script type="math/tex; mode=display">
-\mathrm{EI}=\mathrm{p}^{\frac{1}{\theta}}=(m+2)^{1 /\left(1+\sum_{j=1}^{m+1} \theta_{j}\right)}</script><p>注意到其中只利用到f(x)的一阶导数  $\therefore m = 0$</p>
-<p>对比牛顿迭代公式(4)，可得到:</p>
-<script type="math/tex; mode=display">
-\lim _{i \rightarrow \infty} \frac{\left|\varepsilon_{i+1}\right|}{\left|\varepsilon_{i}\right|^{2}}=\frac{1}{2}|f(a)|^{2}\left|g^{(2)}(0)\right|</script><p>效率指数为:</p>
-<script type="math/tex; mode=display">
-E I=2^{\frac{1}{1+\theta_{1}}}</script>
+        <h1 id="Google域名验证的问题"><a href="#Google域名验证的问题" class="headerlink" title="Google域名验证的问题"></a>Google域名验证的问题</h1><p>搭建完博客后，自然想要有一个自己的专属域名，前段时间在阿里云上购买了一个域名 <code>mkco.xyz</code>，由于之前已经配置过基于github的google的sitemap，故现在需要修改，重新验证域名，记录一下遇到的一些问题</p>
+<h2 id="1、进入新版Google-Search-Console"><a href="#1、进入新版Google-Search-Console" class="headerlink" title="1、进入新版Google Search Console"></a>1、进入新版Google Search Console</h2><ul>
+<li><p>点击<a href="https://www.google.com/webmasters/" target="_blank" rel="noopener">这里</a>进入新版的 Google Search Console 登录界面。</p>
+</li>
+<li><p>点击右上角的 Login（登录）按钮登录你的谷歌账号。</p>
+</li>
+<li><p>同时<a href="https://search.google.com/search-console/welcome" target="_blank" rel="noopener">点击这里</a>进入到网站验证界面，选择网域验证，在左侧输入域名，点击<code>继续</code>。</p>
+<ul>
+<li>注意：在左侧的对话框中输入的域名（不带<code>www</code>，并且不需要加<code>http</code>或是<code>https</code>）</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200405-GoogleConsoleSearch验证1.png" alt="GoogleConsoleSearch验证1"></p>
+<ul>
+<li>弹出界面如下（由于我的域名<code>mkco.xyz</code>已经完成验证，故使用<code>baidu.com</code>作为示例）：</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200405-GoogleConsoleSearch验证.png" alt="GoogleConsoleSearch验证"></p>
+<p><strong>注意到这里的要求：</strong></p>
+<ul>
+<li><p>登录到您的域名提供商网站</p>
+</li>
+<li><p>将下面的 TXT 记录复制到你的的DNS配置中</p>
+</li>
+</ul>
+<p>⚠️<strong>点击<code>复制</code>，保存TXT记录</strong></p>
+<h2 id="2、修改DNS配置"><a href="#2、修改DNS配置" class="headerlink" title="2、修改DNS配置"></a>2、修改DNS配置</h2><ul>
+<li>由于我的域名是在阿里云购买，故阿里云的,找到<strong>域名解析管理界面</strong>，点击解析设置</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200405-20200405-阿里云域名解析界面.png" alt="阿里云域名解析界面"></p>
+<ul>
+<li>点击添加一条记录</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200405-阿里云域名解析设置.png" alt="阿里云域名解析设置"></p>
+<ul>
+<li>需要填写的内容如下：<ul>
+<li>记录类型：选择TXT</li>
+<li>主机记录：选择@</li>
+<li>记录值：在google console search 界面复制的TXT记录</li>
+<li>其他内容均不需要修改，默认即可</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200405-阿里云添加域名解析记录.png" alt="阿里云添加域名解析记录"></p>
+<p>填写完成后点击<code>确定</code>即可</p>
+<h2 id="3、完成验证以及二级域名验证"><a href="#3、完成验证以及二级域名验证" class="headerlink" title="3、完成验证以及二级域名验证"></a>3、完成验证以及二级域名验证</h2><ul>
+<li><p>回到之前谷歌的界面，点击<code>验证</code>按钮进行验证，如果显示绿色的结果，代表验证成功。</p>
+</li>
+<li><p>如果不成功</p>
+<ul>
+<li>可以等待一段时间，DNS解析需要一段时间</li>
+<li>或者，根据上方步骤重新检查验证流程。</li>
+</ul>
+</li>
+<li><p>到这里，主域名的验证就结束了。如果你想验证二级子域名（比如：<code>www.xxx.com</code> 或者是<code>en.xxx.com</code>这样的）只需要在最开始输入对应的二级域名，并且在添加txt记录时，将“@”改成二级域名前缀即可</p>
+</li>
+</ul>
+
     </div>
 
     
@@ -303,7 +323,7 @@ E I=2^{\frac{1}{1+\theta_{1}}}</script>
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
           </div>
 
         
@@ -311,11 +331,11 @@ E I=2^{\frac{1}{1+\theta_{1}}}</script>
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/03/19/%E5%AF%B9%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%E7%9A%84%E6%94%B9%E8%BF%9B/" rel="next" title="对优先队列的改进">
-      对优先队列的改进 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/03/Baidu%E6%96%87%E5%BA%93%E7%88%AC%E5%8F%96/%E7%99%BE%E5%BA%A6%E6%96%87%E5%BA%93%E7%88%AC%E8%99%AB(%E4%BA%8C)PPT/" rel="prev" title="Baidu文库爬取/百度文库爬虫(二)PPT">
+      <i class="fa fa-chevron-left"></i> Baidu文库爬取/百度文库爬虫(二)PPT
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -375,6 +395,7 @@ E I=2^{\frac{1}{1+\theta_{1}}}</script>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Google域名验证的问题"><span class="nav-number">1.</span> <span class="nav-text">Google域名验证的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、进入新版Google-Search-Console"><span class="nav-number">1.1.</span> <span class="nav-text">1、进入新版Google Search Console</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、修改DNS配置"><span class="nav-number">1.2.</span> <span class="nav-text">2、修改DNS配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、完成验证以及二级域名验证"><span class="nav-number">1.3.</span> <span class="nav-text">3、完成验证以及二级域名验证</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -512,59 +533,6 @@ E I=2^{\frac{1}{1+\theta_{1}}}</script>
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
