@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="_YsgsXoF8llBK3Pu-YmyIE_eQcFPYZO-mW0dWkpelFU" />
+<meta name="baidu-site-verification" content="ykz4IhQmKc" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="ykz4IhQmKc">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"mkco.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="一阶常微分方程初值问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算方法实验&#x2F;实验八">
+<meta property="og:url" content="http://mkco.xyz/2020/04/20/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E5%85%AB/index.html">
+<meta property="og:site_name" content="M010K">
+<meta property="og:description" content="一阶常微分方程初值问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200420-%E5%AE%9E%E9%AA%8C%E5%85%AB%E7%BB%93%E6%9E%9C.png">
+<meta property="article:published_time" content="2020-04-20T01:20:24.908Z">
+<meta property="article:modified_time" content="2020-04-25T14:06:41.995Z">
+<meta property="article:author" content="MingKai Luo">
+<meta property="article:tag" content="Matlab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200420-%E5%AE%9E%E9%AA%8C%E5%85%AB%E7%BB%93%E6%9E%9C.png">
+
+<link rel="canonical" href="http://mkco.xyz/2020/04/20/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E5%85%AB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>计算方法实验/实验八 | M010K</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">M010K</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://mkco.xyz/2020/04/20/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E5%85%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="MingKai Luo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M010K">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算方法实验/实验八
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-20 09:20:24" itemprop="dateCreated datePublished" datetime="2020-04-20T09:20:24+08:00">2020-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-25 22:06:41" itemprop="dateModified" datetime="2020-04-25T22:06:41+08:00">2020-04-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">计算方法实验</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/20/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E5%85%AB/" class="post-meta-item leancloud_visitors" data-flag-title="计算方法实验/实验八" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/20/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E5%85%AB/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/20/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E5%85%AB/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+            <div class="post-description">一阶常微分方程初值问题</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="作业八"><a href="#作业八" class="headerlink" title="作业八"></a>作业八</h1><h2 id="一阶常微分方程初值问题"><a href="#一阶常微分方程初值问题" class="headerlink" title="一阶常微分方程初值问题"></a>一阶常微分方程初值问题</h2><p>【作业内容】: 用Euler法、改进的欧拉法、四阶龙格-库塔法求如下一阶常微分方程</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}
+{y}^{\prime}={y}-\frac{2 {x}} \\ 
+{y}({0})={1}
+\end{array}\right.</script><script type="math/tex; mode=display">
+{x} \in[0,2]</script><p>初值问题的解（小数点后保留8位小数），取<strong>h = 0.05</strong>.</p>
+<p>【作业要求】：</p>
+<ol>
+<li>将各种方法求出的解连同精确解使用同一个表格进行数据比较；</li>
+<li>画出精确解（见教材）的图形，并且将其它3种方法得到的近似解画出图形,进行比较，见如上的例子7.1。</li>
+<li>解释各种求解方法。</li>
+</ol>
+<p>【题目分析及所采用的算法】</p>
+<p>按题目要求，需要我们计算一阶常微分方程问题，分别使用Euler法、改进的欧拉法、四阶龙格-库塔法来进行迭代计算。</p>
+<ol>
+<li><p>Euler法：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}
+{y}_{i+1}={y}_{i}+{hf}({x}_{i}, {y}_{i}) , {i}={0}, {1}, \ldots, {n} \\ 
+{y}_{0}={y}({x}_{0})
+\end{array}\right.</script><p>$h$为步长。依次从初值$y_0 = y(x_0)$开始迭代。</p>
+</li>
+<li><p>改进的欧拉法(将梯形公式和Euler法结合，精度更高):</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+y_{p}={y}_{i}+{hf}({x}_{i}, {y}_{i}) \\ 
+y_{c}={y}_{i}+{h f}({x}_{i+1}, {y}_{p}) \\ 
+y_{i+1}=\frac{1}{2} (y_{p}+{y}_{c}) \\ 
+i=0, 1, 2 \ldots, n-1\\
+\end{array}</script><p>$h$为步长。依次从初值$y_0 = y(x_0)$开始迭代。</p>
+</li>
+<li><p>四阶龙格-库塔法:</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}{k}_{1}={f}\left({x}_{i}, {y}_{i}\right) \\ 
+{k}_{2}={f}\left({x}_{i}+\frac{2}, {y}_{i}+\frac{2} {k}_{1}\right) \\ 
+{k}_{3}={f}\left({x}_{i}+\frac{2}, {y}_{i}+\frac{2} {k}_{2}\right) \\ 
+{k}_{4}={f}\left({x}_{i}+{h}, {y}_{i}+{h} {k}_{3}\right) \\ 
+{y}_{i+{1}}={y}_{i}+\frac{h}{6}\left({k}_{1}+{2} {k}_{2}+{2} {k}_{3}+{k}_{4}\right) \quad {i}={0}, {1}, \ldots, {n}\\
+\end{array}\right.</script><p>$h$为步长。依次从初值$y_0 = y(x_0)$开始迭代。</p>
+</li>
+</ol>
+<p>【主要代码（要求程序代码有详细的注释）】</p>
+<p>代码含有相关注释。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%Ordinary_differential.m</span></span><br><span class="line">format long;</span><br><span class="line"><span class="comment">% 步长</span></span><br><span class="line">h = <span class="number">1</span>/<span class="number">20</span>;</span><br><span class="line"><span class="comment">% 右边界</span></span><br><span class="line">xf = <span class="number">2</span>;</span><br><span class="line"><span class="comment">% 设置步长</span></span><br><span class="line">x = <span class="number">0</span> : h : xf;</span><br><span class="line"><span class="comment">% 已知函数</span></span><br><span class="line">Func = @(x, y)(y - ((<span class="number">2</span> * x) / y));</span><br><span class="line"></span><br><span class="line"><span class="comment">%Euler</span></span><br><span class="line"><span class="comment">% 初始化y数组</span></span><br><span class="line">y_E = <span class="built_in">zeros</span>(<span class="number">1</span>, <span class="built_in">length</span>(x));</span><br><span class="line">y_E(<span class="number">1</span>) = <span class="number">1</span>;</span><br><span class="line"><span class="comment">% 复现公式 &amp; 迭代计算</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:(<span class="built_in">length</span>(x)<span class="number">-1</span>)</span><br><span class="line">    y_E(<span class="built_in">i</span> + <span class="number">1</span>) = y_E(<span class="built_in">i</span>) + Func(x(<span class="built_in">i</span>), y_E(<span class="built_in">i</span>)) * h;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%Improve Euler</span></span><br><span class="line"><span class="comment">% 初始化y数组</span></span><br><span class="line">y_IE = <span class="built_in">zeros</span>(<span class="number">1</span>, <span class="built_in">length</span>(x));</span><br><span class="line">y_IE(<span class="number">1</span>) = <span class="number">1</span>;</span><br><span class="line"><span class="comment">% 复现公式 &amp; 迭代计算</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:(<span class="built_in">length</span>(x) - <span class="number">1</span>)</span><br><span class="line">    p = y_IE(<span class="built_in">i</span>) + h * Func(x(<span class="built_in">i</span>), y_IE(<span class="built_in">i</span>));</span><br><span class="line">    c = y_IE(<span class="built_in">i</span>) + h * Func(x(<span class="built_in">i</span> + <span class="number">1</span>), p);</span><br><span class="line">    y_IE(<span class="built_in">i</span> + <span class="number">1</span>) = (<span class="number">1</span>/<span class="number">2</span>) * (p + c);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%Rung Kutta</span></span><br><span class="line"><span class="comment">% 初始化y数组</span></span><br><span class="line">y_RK = <span class="built_in">zeros</span>(<span class="number">1</span>, <span class="built_in">length</span>(x));</span><br><span class="line">y_RK(<span class="number">1</span>) = <span class="number">1</span>;</span><br><span class="line"><span class="comment">% 复现公式 &amp; 迭代计算</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:(<span class="built_in">length</span>(x) - <span class="number">1</span>) </span><br><span class="line">     k1 = Func(x(<span class="built_in">i</span>), y_RK(<span class="built_in">i</span>));</span><br><span class="line">     k2 = Func(x(<span class="built_in">i</span>) + <span class="number">0.5</span> * h, y_RK(<span class="built_in">i</span>) + <span class="number">0.5</span> * h * k1);</span><br><span class="line">     k3 = Func((x(<span class="built_in">i</span>) + <span class="number">0.5</span> * h), (y_RK(<span class="built_in">i</span>) + <span class="number">0.5</span> * h * k2));</span><br><span class="line">     k4 = Func((x(<span class="built_in">i</span>) + h), (y_RK(<span class="built_in">i</span>) + k3 * h));</span><br><span class="line">     y_RK(<span class="built_in">i</span> + <span class="number">1</span>) = y_RK(<span class="built_in">i</span>) + (<span class="number">1</span> / <span class="number">6</span>) * (k1 + <span class="number">2</span> * k2 + <span class="number">2</span> * k3 + k4) * h;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%Exact</span></span><br><span class="line"><span class="comment">% 使用ode45计算精确函数</span></span><br><span class="line">x0 = <span class="number">0</span>;</span><br><span class="line">y0 = <span class="number">1</span>;</span><br><span class="line">yspan = [x0 xf];</span><br><span class="line">[x_ode45, y_ode45] = ode45(Func,yspan,y0);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 绘图</span></span><br><span class="line">subplot(<span class="number">221</span>)</span><br><span class="line"><span class="built_in">plot</span>(x_ode45, y_ode45, <span class="string">'-'</span>); </span><br><span class="line">xlabel(<span class="string">'x'</span>);</span><br><span class="line">ylabel(<span class="string">'y'</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">'Exact'</span>);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">222</span>)</span><br><span class="line"><span class="built_in">plot</span>(x, y_E, <span class="string">'-'</span>);</span><br><span class="line">xlabel(<span class="string">'x'</span>);</span><br><span class="line">ylabel(<span class="string">'y'</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">'Euler'</span>);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">223</span>)</span><br><span class="line"><span class="built_in">plot</span>(x, y_IE, <span class="string">'-'</span>);</span><br><span class="line">xlabel(<span class="string">'x'</span>);</span><br><span class="line">ylabel(<span class="string">'y'</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">'Improve Euler'</span>);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">224</span>)</span><br><span class="line"><span class="built_in">plot</span>(x, y_RK, <span class="string">'-'</span>);</span><br><span class="line">xlabel(<span class="string">'x'</span>);</span><br><span class="line">ylabel(<span class="string">'y'</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">'Rung Kutta'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% table</span></span><br><span class="line">res = [<span class="built_in">round</span>(transpose(x), <span class="number">8</span>), <span class="built_in">round</span>(transpose(y_E), <span class="number">8</span>), <span class="built_in">round</span>(transpose(y_IE), <span class="number">8</span>), <span class="built_in">round</span>(transpose(y_RK), <span class="number">8</span>), <span class="built_in">round</span>(y_ode45, <span class="number">8</span>)];</span><br><span class="line"><span class="built_in">table</span> = array2table(res, <span class="string">'VariableNames'</span>, &#123;<span class="string">'x'</span>,<span class="string">'Euler'</span>,<span class="string">'Improve Euler'</span>, <span class="string">'Rung Kutta'</span>, <span class="string">'Exact'</span>&#125;);</span><br><span class="line"><span class="built_in">table</span>;</span><br></pre></td></tr></table></figure>
+<p>【结果比较与（或）分析】</p>
+<p>绘图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200420-实验八结果.png" alt="实验八结果"></p>
+<p>明显的看出来欧拉法并没有其他两种方法得来的曲线光滑，更不精确。</p>
+<p>可以从数值上进一步判断其精确程度：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; table</span><br><span class="line"></span><br><span class="line">table &#x3D;</span><br><span class="line"></span><br><span class="line">  41×5 table</span><br><span class="line"></span><br><span class="line">     x        Euler       Improve Euler    Rung Kutta      Exact   </span><br><span class="line">    ____    __________    _____________    __________    __________</span><br><span class="line"></span><br><span class="line">       0             1              1               1             1</span><br><span class="line">    0.05          1.05     1.04886905      1.04880886    1.04881018</span><br><span class="line">     0.1     1.0977381     1.09556112      1.09544514    1.09544538</span><br><span class="line">    0.15    1.14351536     1.14034459      1.14017546    1.14017458</span><br><span class="line">     0.2    1.18757368     1.18343698        1.183216    1.18321606</span><br><span class="line">    0.25    1.23011131     1.22501749      1.22474493    1.22474526</span><br><span class="line">     0.3    1.27129351     1.26523585      1.26491113    1.26491111</span><br><span class="line">    0.35    1.31126017     1.30421877      1.30384056    1.30384029</span><br><span class="line">     0.4     1.3501313     1.34207454      1.34164088    1.34164095</span><br><span class="line">    0.45    1.38801111      1.3788967      1.37840498    1.37840509</span><br><span class="line">     0.5    1.42499118     1.41476663      1.41421368    1.41421362</span><br><span class="line">    0.55     1.4611528     1.44975574      1.44913781    1.44913769</span><br><span class="line">     0.6    1.49656893     1.48392711      1.48323985    1.48323991</span><br><span class="line">    0.65    1.53130567     1.51733679      1.51657526    1.51657529</span><br><span class="line">     0.7    1.56542352     1.55003492      1.54919353    1.54919345</span><br><span class="line">    0.75    1.59897836     1.58206653      1.58113904    1.58113897</span><br><span class="line">     0.8    1.63202233     1.61347233      1.61245178    1.61245182</span><br><span class="line">    0.85    1.66460451     1.64428925      1.64316793    1.64316793</span><br><span class="line">     0.9    1.69677156     1.67455096      1.67332034    1.67332026</span><br><span class="line">    0.95    1.72856823      1.7042883      1.70293895    1.70293889</span><br><span class="line">       1    1.76003786     1.73352962      1.73205115    1.73205117</span><br><span class="line">    1.05    1.79122279     1.76230109      1.76068206    1.76068204</span><br><span class="line">     1.1    1.82216476     1.79062697      1.78885479    1.78885471</span><br><span class="line">    1.15    1.85290524     1.81852981      1.81659066     1.8165906</span><br><span class="line">     1.2     1.8834858     1.84603071      1.84390938    1.84390939</span><br><span class="line">    1.25    1.91394844     1.87314942      1.87082923    1.87082919</span><br><span class="line">     1.3    1.94433584     1.89990456      1.89736719    1.89736709</span><br><span class="line">    1.35    1.97469176     1.92631373      1.92353905    1.92353898</span><br><span class="line">     1.4    2.00506125     1.95239363      1.94935958    1.94935956</span><br><span class="line">    1.45    2.03549101      1.9781602      1.97484254    1.97484247</span><br><span class="line">     1.5    2.06602967      2.0036287      2.00000085    2.00000073</span><br><span class="line">    1.55    2.09672813      2.0288138       2.0248466     2.0248465</span><br><span class="line">     1.6    2.12763984     2.05372973      2.04939117    2.04939111</span><br><span class="line">    1.65    2.15882113     2.07839027      2.07364525    2.07364515</span><br><span class="line">     1.7    2.19033159     2.10280892      2.09761891    2.09761877</span><br><span class="line">    1.75    2.22223435     2.12699893      2.12132168    2.12132154</span><br><span class="line">     1.8     2.2545965     2.15097339      2.14476252    2.14476241</span><br><span class="line">    1.85    2.28748942     2.17474529      2.16794994    2.16794978</span><br><span class="line">     1.9     2.3209892     2.19832764      2.19089198    2.19089178</span><br><span class="line">    1.95    2.35517701     2.22173348      2.21359628    2.21359608</span><br><span class="line">       2    2.39013954     2.24497601      2.23607008     2.2360699</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>可以看出来。精确程度：欧拉法 &lt; 改进的欧拉法  &lt; 龙格库塔法 。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Matlab/" rel="tag"># Matlab</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/16/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%B8%83/" rel="prev" title="计算方法实验/实验七">
+      <i class="fa fa-chevron-left"></i> 计算方法实验/实验七
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/23/%E5%B7%A5%E5%85%B7/Typora%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E9%A2%9C%E8%89%B2%E5%A4%A7%E5%B0%8F%E7%AD%89%E5%B1%9E%E6%80%A7/" rel="next" title="工具/Typora设置字体颜色大小等属性">
+      工具/Typora设置字体颜色大小等属性 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#作业八"><span class="nav-number">1.</span> <span class="nav-text">作业八</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一阶常微分方程初值问题"><span class="nav-number">1.1.</span> <span class="nav-text">一阶常微分方程初值问题</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="MingKai Luo"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">MingKai Luo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MingKai Luo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">86k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:18</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"MGgbWxtQ2nM3r8voLDOndkxD-gzGzoHsz","app_key":"wIYqHCMKC9xFHUxz3G48FlRo","server_url":null,"security":false,"betterPerformance":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'MGgbWxtQ2nM3r8voLDOndkxD-gzGzoHsz',
+      appKey     : 'wIYqHCMKC9xFHUxz3G48FlRo',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : 'mkco.xyz# When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)'
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

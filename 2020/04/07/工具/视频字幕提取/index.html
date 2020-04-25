@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="_YsgsXoF8llBK3Pu-YmyIE_eQcFPYZO-mW0dWkpelFU" />
+<meta name="baidu-site-verification" content="ykz4IhQmKc" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="ykz4IhQmKc">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"mkco.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="利用Dowine4+网易见外进行Mooc视频字幕提取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工具&#x2F;视频字幕提取">
+<meta property="og:url" content="http://mkco.xyz/2020/04/07/%E5%B7%A5%E5%85%B7/%E8%A7%86%E9%A2%91%E5%AD%97%E5%B9%95%E6%8F%90%E5%8F%96/index.html">
+<meta property="og:site_name" content="M010K">
+<meta property="og:description" content="利用Dowine4+网易见外进行Mooc视频字幕提取">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200408-Downie%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A7%86%E9%A2%91%E6%8F%90%E5%8F%96.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200408-%E7%BD%91%E6%98%93%E8%A7%81%E5%A4%96%E7%95%8C%E9%9D%A2%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200408-%E7%BD%91%E6%98%93%E8%A7%81%E5%A4%96%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200408-%E7%BD%91%E6%98%93%E8%A7%81%E5%A4%96%E8%A7%86%E9%A2%91%E8%BD%AC%E5%86%99.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200408-%E7%BD%91%E6%98%93%E8%A7%81%E5%A4%96%E5%AD%97%E5%B9%95%E5%AF%BC%E5%87%BA.png">
+<meta property="article:published_time" content="2020-04-07T15:52:40.356Z">
+<meta property="article:modified_time" content="2020-04-25T13:12:59.981Z">
+<meta property="article:author" content="MingKai Luo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200408-Downie%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A7%86%E9%A2%91%E6%8F%90%E5%8F%96.png">
+
+<link rel="canonical" href="http://mkco.xyz/2020/04/07/%E5%B7%A5%E5%85%B7/%E8%A7%86%E9%A2%91%E5%AD%97%E5%B9%95%E6%8F%90%E5%8F%96/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>工具/视频字幕提取 | M010K</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">M010K</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://mkco.xyz/2020/04/07/%E5%B7%A5%E5%85%B7/%E8%A7%86%E9%A2%91%E5%AD%97%E5%B9%95%E6%8F%90%E5%8F%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="MingKai Luo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M010K">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          工具/视频字幕提取
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-07 23:52:40" itemprop="dateCreated datePublished" datetime="2020-04-07T23:52:40+08:00">2020-04-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-25 21:12:59" itemprop="dateModified" datetime="2020-04-25T21:12:59+08:00">2020-04-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/07/%E5%B7%A5%E5%85%B7/%E8%A7%86%E9%A2%91%E5%AD%97%E5%B9%95%E6%8F%90%E5%8F%96/" class="post-meta-item leancloud_visitors" data-flag-title="工具/视频字幕提取" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/07/%E5%B7%A5%E5%85%B7/%E8%A7%86%E9%A2%91%E5%AD%97%E5%B9%95%E6%8F%90%E5%8F%96/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/07/%E5%B7%A5%E5%85%B7/%E8%A7%86%E9%A2%91%E5%AD%97%E5%B9%95%E6%8F%90%E5%8F%96/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>695</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+            <div class="post-description">利用Dowine4+网易见外进行Mooc视频字幕提取</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Mooc视频字幕提取"><a href="#Mooc视频字幕提取" class="headerlink" title="Mooc视频字幕提取"></a>Mooc视频字幕提取</h1><blockquote>
+<p>最近深感网课作业的压力，尤其是思政课程，看视频实在过于难受</p>
+<p>因此想要将mooc视频的内容提取字幕，以便于直接查看</p>
+</blockquote>
+<h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>此教程需要用到付费软件：Dowine</p>
+<h2 id="Step-1-寻找字幕文件"><a href="#Step-1-寻找字幕文件" class="headerlink" title="Step 1 寻找字幕文件"></a>Step 1 寻找字幕文件</h2><p>由于网课的字幕为硬字幕，无法直接找到字幕文件，只好另寻他法，</p>
+<p>容易想到的方法有两种：</p>
+<ul>
+<li>一是对视频字幕进行OCR处理，再尝试了之后发现效果不是很理想，我猜测，主要是视频的背景影响了OCR的效果</li>
+<li>使用音频识别的方式讲字幕识别出来，当然也有一定的限制（看老师的普通话是不是标准🤦‍♂️）</li>
+</ul>
+<p>由于我这门课的老师普通话相当流利，决定采取第二种方法</p>
+<h2 id="Step-2-下载视频"><a href="#Step-2-下载视频" class="headerlink" title="Step 2 下载视频"></a>Step 2 下载视频</h2><p>使用Dowine的自定义下载功能即可（其实好像是提取了一个m3u8文件，以后有时间可能会自己动手设计爬虫试一下，这里就先用“轮子”好了）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200408-Downie自定义视频提取.png" alt="Downie自定义视频提取"></p>
+<h2 id="Step-3-提取字幕"><a href="#Step-3-提取字幕" class="headerlink" title="Step 3 提取字幕"></a>Step 3 提取字幕</h2><p>关键的问题来了，这一步的实现在于——善于发现（<del>薅羊毛</del>）</p>
+<p>经过一番尝试之后，意外发现了<a href="https://jianwai.netease.com/" target="_blank" rel="noopener">网易见外工作台</a></p>
+<p>仅需要使用网易邮箱登录即可，打开后界面是这样的：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200408-网易见外界面截图.png" alt="网易见外界面截图"></p>
+<p>点击右上角的新建项目，有以下八个选项，因为mooc是中文的，选择其中的视频转写即可。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200408-网易见外新建项目.png" alt="网易见外新建项目"></p>
+<ul>
+<li>上传视频文件（会自动按照视频名字填写项目名称，也可以自己填）</li>
+<li>选择文件语言为中文</li>
+<li>提交</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200408-网易见外视频转写.png" alt="20200408-网易见外视频转写"></p>
+<h2 id="Step-4-接下来就是漫长的等待了"><a href="#Step-4-接下来就是漫长的等待了" class="headerlink" title="Step 4 接下来就是漫长的等待了"></a>Step 4 接下来就是漫长的等待了</h2><p>虽说预测转换时间是20分钟，但是好像实际上会比较长</p>
+<p>所以建议同时新建多个任务</p>
+<p>⚠️⚠️⚠️最重要的一点，每天，每个账号（邮箱）有两个小时的免费额度（已经可以满足需求了）</p>
+<p>但是，如果你有多个邮箱，你懂的。。。</p>
+<h2 id="Step-5-导出字幕"><a href="#Step-5-导出字幕" class="headerlink" title="Step 5 导出字幕"></a>Step 5 导出字幕</h2><p>点击右上角的导出字幕即可，导出格式为srt（有需要的话写个程序把文本提取即可，或者用现有的视频处理软件，都可以将字幕转换为txt形式）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200408-网易见外字幕导出.png" alt="网易见外字幕导出"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/06/%E5%9B%BE%E5%BA%8A/Typora%E4%B8%8A%E4%BC%A0Github%E5%9B%BE%E5%BA%8A%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3/" rel="prev" title="图床/Typora上传Github图床失败的解决">
+      <i class="fa fa-chevron-left"></i> 图床/Typora上传Github图床失败的解决
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/12/%E5%B7%A5%E5%85%B7/word%E4%B8%AD%E6%8F%92%E5%85%A5%E4%BB%A3%E7%A0%81/" rel="next" title="工具/word中插入代码">
+      工具/word中插入代码 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mooc视频字幕提取"><span class="nav-number">1.</span> <span class="nav-text">Mooc视频字幕提取</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最前"><span class="nav-number">1.1.</span> <span class="nav-text">写在最前</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1-寻找字幕文件"><span class="nav-number">1.2.</span> <span class="nav-text">Step 1 寻找字幕文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2-下载视频"><span class="nav-number">1.3.</span> <span class="nav-text">Step 2 下载视频</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-3-提取字幕"><span class="nav-number">1.4.</span> <span class="nav-text">Step 3 提取字幕</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-4-接下来就是漫长的等待了"><span class="nav-number">1.5.</span> <span class="nav-text">Step 4 接下来就是漫长的等待了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-5-导出字幕"><span class="nav-number">1.6.</span> <span class="nav-text">Step 5 导出字幕</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="MingKai Luo"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">MingKai Luo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MingKai Luo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">86k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:18</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"MGgbWxtQ2nM3r8voLDOndkxD-gzGzoHsz","app_key":"wIYqHCMKC9xFHUxz3G48FlRo","server_url":null,"security":false,"betterPerformance":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'MGgbWxtQ2nM3r8voLDOndkxD-gzGzoHsz',
+      appKey     : 'wIYqHCMKC9xFHUxz3G48FlRo',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : 'mkco.xyz# When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)'
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

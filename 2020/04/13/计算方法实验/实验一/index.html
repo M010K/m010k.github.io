@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="_YsgsXoF8llBK3Pu-YmyIE_eQcFPYZO-mW0dWkpelFU" />
+<meta name="baidu-site-verification" content="ykz4IhQmKc" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="ykz4IhQmKc">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"mkco.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="解线性方程组的高斯消去法与高斯列主元消去法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算方法实验&#x2F;实验一">
+<meta property="og:url" content="http://mkco.xyz/2020/04/13/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%B8%80/index.html">
+<meta property="og:site_name" content="M010K">
+<meta property="og:description" content="解线性方程组的高斯消去法与高斯列主元消去法">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-13T11:28:54.478Z">
+<meta property="article:modified_time" content="2020-04-25T13:08:39.091Z">
+<meta property="article:author" content="MingKai Luo">
+<meta property="article:tag" content="Matlab">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://mkco.xyz/2020/04/13/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%B8%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>计算方法实验/实验一 | M010K</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">M010K</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://mkco.xyz/2020/04/13/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%B8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="MingKai Luo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M010K">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算方法实验/实验一
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-13 19:28:54" itemprop="dateCreated datePublished" datetime="2020-04-13T19:28:54+08:00">2020-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-25 21:08:39" itemprop="dateModified" datetime="2020-04-25T21:08:39+08:00">2020-04-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">计算方法实验</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/13/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%B8%80/" class="post-meta-item leancloud_visitors" data-flag-title="计算方法实验/实验一" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/13/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%B8%80/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/13/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%B8%80/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">解线性方程组的高斯消去法与高斯列主元消去法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="实验一"><a href="#实验一" class="headerlink" title="实验一"></a>实验一</h1><h2 id="解线性方程组的高斯消去法与高斯列主元消去法"><a href="#解线性方程组的高斯消去法与高斯列主元消去法" class="headerlink" title="解线性方程组的高斯消去法与高斯列主元消去法"></a>解线性方程组的高斯消去法与高斯列主元消去法</h2><p>【作业内容】：解线性方程组：</p>
+<script type="math/tex; mode=display">
+\left[\begin{matrix}
+3.01  & 6.03  & 1.96\\
+1.348 & 6.65  & 0.002\\ 
+1.47  & -4.81 & 9.34\\ 
+\end{matrix}\right]
+*
+\left[\begin{matrix}
+x_{1}\\
+x_{2}\\ 
+x_{3}\\ 
+\end{matrix}\right]
+=
+\left[\begin{matrix}
+11\\
+8\\ 
+6\\ 
+\end{matrix}\right]</script><ol>
+<li><p>高斯消去法</p>
+<p> 用高斯消去法求解上述方程组，输出消元过程以及$Ax=b$中矩阵$A$、$b$、解向量$x$及$detA$。</p>
+</li>
+<li><p>高斯列主元消去法</p>
+<p> 用高斯列主元消去法求解上述方程组，输出列<strong>主元选取</strong>、<strong>消元过程</strong>，包括<strong>行交换次序</strong>，$Ax=b$中矩阵$A$、$b$、解向量$x$及$detA$。</p>
+</li>
+<li><p>比较两种消去法. 用MATLAB的内部函数$inv$求出系数矩阵的逆矩阵，再输入命令$x=inv(A)*b$, 即可求出上述两个方程组的解。并与高斯消去法、高斯列主元消去法求出的解进行比较，体会选主元的方法具有良好的数值稳定性。</p>
+</li>
+</ol>
+<p><strong>说明</strong>：计算过程保留小数点以后8位数字</p>
+<h3 id="高斯消去法"><a href="#高斯消去法" class="headerlink" title="高斯消去法"></a>高斯消去法</h3><ul>
+<li>matlab代码如下</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Gauss.m</span></span><br><span class="line"><span class="comment">% 高斯法求解线性方程组Ax=b</span></span><br><span class="line"><span class="comment">% A为输入矩阵系数,b为方程组右端系数</span></span><br><span class="line"><span class="comment">% 方程组的解保存在x变量中</span></span><br><span class="line"><span class="comment">% 先输入方程系数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 设置计算过程的默认精度</span></span><br><span class="line">digits(<span class="number">9</span>);</span><br><span class="line"></span><br><span class="line">A = vpa([<span class="number">3.01</span>,<span class="number">6.03</span>,<span class="number">1.96</span>; <span class="number">1.348</span>,<span class="number">6.65</span>,<span class="number">0.002</span>; <span class="number">1.47</span>, <span class="number">-4.81</span>,<span class="number">9.34</span>])</span><br><span class="line"><span class="built_in">disp</span>(<span class="string">'detA='</span>)</span><br><span class="line"><span class="built_in">disp</span>(det(A))</span><br><span class="line">b = [<span class="number">11</span>,<span class="number">8</span>,<span class="number">6</span>]'</span><br><span class="line">[m,n]=<span class="built_in">size</span>(A);</span><br><span class="line"><span class="comment">%检查系数正确性</span></span><br><span class="line"><span class="keyword">if</span> m~=n</span><br><span class="line">    error(<span class="string">'矩阵A的行数和列数必须相同'</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> m~=<span class="built_in">size</span>(b)</span><br><span class="line">    error(<span class="string">'b的大小必须和A的行数或A的列数相同'</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%再检查方程是否存在唯一解</span></span><br><span class="line"><span class="keyword">if</span> rank(A)~=rank([A,b])</span><br><span class="line">    error(<span class="string">'A矩阵的秩和增广矩阵的秩不相同,方程不存在唯一解'</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%这里采用增广矩阵行变换的方式求解</span></span><br><span class="line">c=n+<span class="number">1</span>;</span><br><span class="line">A(:,c)=b; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">%高斯消元，输出消元过程</span></span><br><span class="line"><span class="built_in">disp</span>(<span class="string">'高斯消元:'</span>);</span><br><span class="line"><span class="keyword">for</span> k=<span class="number">1</span>:n<span class="number">-1</span></span><br><span class="line">    A(k+<span class="number">1</span>:n, k:c) = A(k+<span class="number">1</span>:n, k:c)-(A(k+<span class="number">1</span>:n,k)/ A(k,k))*A(k, k:c)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%%回代结果</span></span><br><span class="line">x=<span class="built_in">zeros</span>(<span class="built_in">length</span>(b),<span class="number">1</span>);  </span><br><span class="line">x(n)=A(n,c)/A(n,n);</span><br><span class="line"><span class="keyword">for</span> k=n<span class="number">-1</span>:<span class="number">-1</span>:<span class="number">1</span></span><br><span class="line">x(k)=(A(k,c)-A(k,k+<span class="number">1</span>:n)*x(k+<span class="number">1</span>:n))/A(k,k);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%显示计算结果</span></span><br><span class="line"><span class="built_in">disp</span>(<span class="string">'x='</span>);</span><br><span class="line"><span class="built_in">disp</span>(x);</span><br></pre></td></tr></table></figure>
+<h3 id="高斯列主元消去法"><a href="#高斯列主元消去法" class="headerlink" title="高斯列主元消去法"></a>高斯列主元消去法</h3><ul>
+<li>matlab代码如下</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Column_Gauss.m</span></span><br><span class="line"><span class="comment">% 高斯法求解线性方程组Ax=b</span></span><br><span class="line"><span class="comment">% A为输入矩阵系数,b为方程组右端系数</span></span><br><span class="line"><span class="comment">% 方程组的解保存在x变量中</span></span><br><span class="line"><span class="comment">% 先输入方程系数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 设置计算过程的默认精度</span></span><br><span class="line">digits(<span class="number">9</span>);</span><br><span class="line">A = vpa([<span class="number">3.01</span>,<span class="number">6.03</span>,<span class="number">1.96</span>; <span class="number">1.348</span>,<span class="number">6.65</span>,<span class="number">0.002</span>; <span class="number">1.47</span>, <span class="number">-4.81</span>,<span class="number">9.34</span>])</span><br><span class="line"><span class="built_in">disp</span>(<span class="string">'detA='</span>)</span><br><span class="line"><span class="built_in">disp</span>(det(A))</span><br><span class="line">b = [<span class="number">11</span>,<span class="number">8</span>,<span class="number">6</span>]'</span><br><span class="line">[m,n]=<span class="built_in">size</span>(A);</span><br><span class="line"></span><br><span class="line"><span class="comment">%检查系数正确性</span></span><br><span class="line"><span class="keyword">if</span> m~=n</span><br><span class="line">    error(<span class="string">'矩阵A的行数和列数必须相同'</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> m~=<span class="built_in">size</span>(b)</span><br><span class="line">    error(<span class="string">'b的大小必须和A的行数或A的列数相同'</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%再检查方程是否存在唯一解</span></span><br><span class="line"><span class="keyword">if</span> rank(A)~=rank([A,b])</span><br><span class="line">    error(<span class="string">'A矩阵的秩和增广矩阵的秩不相同,方程不存在唯一解'</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%这里采用增广矩阵行变换的方式求解</span></span><br><span class="line">c=n+<span class="number">1</span>;</span><br><span class="line">A(:,c)=b; </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:n</span><br><span class="line">    <span class="built_in">disp</span>([<span class="string">'第'</span>,num2str(<span class="built_in">i</span>),<span class="string">'次交换列主元前:'</span>])</span><br><span class="line">    <span class="built_in">disp</span>(A);</span><br><span class="line">    [max_col,position_to_i]= <span class="built_in">max</span>(<span class="built_in">abs</span>(A(<span class="built_in">i</span>:<span class="keyword">end</span>,<span class="built_in">i</span>)));<span class="comment">%只考虑i后的行列，选取绝对值较大的作为主元</span></span><br><span class="line">    <span class="keyword">if</span> max_col == <span class="number">0</span></span><br><span class="line">       error(<span class="string">'主对角元是0，无唯一解，无法用高斯主列消元法解'</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="comment">%交换最大元列 的行</span></span><br><span class="line">    max_col_rowposition = position_to_i+<span class="built_in">i</span><span class="number">-1</span>;<span class="comment">%列中的实际位置..</span></span><br><span class="line">    <span class="keyword">if</span> max_col_rowposition ~= <span class="built_in">i</span></span><br><span class="line">        temp = A(<span class="built_in">i</span>,:);</span><br><span class="line">        A(<span class="built_in">i</span>,:) = A(max_col_rowposition,:);</span><br><span class="line">        A(max_col_rowposition,:) = temp;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="built_in">disp</span>([<span class="string">'第'</span>,num2str(<span class="built_in">i</span>),<span class="string">'次交换列主元后:'</span>])</span><br><span class="line">    <span class="built_in">disp</span>(A);</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = (<span class="built_in">i</span>+<span class="number">1</span>):n</span><br><span class="line">        A(<span class="built_in">j</span>,:) = A(<span class="built_in">j</span>,:) - A(<span class="built_in">j</span>,<span class="built_in">i</span>) / A(<span class="built_in">i</span>,<span class="built_in">i</span>) * A(<span class="built_in">i</span>,:);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="built_in">disp</span>([<span class="string">'第'</span>,num2str(<span class="built_in">i</span>),<span class="string">'次消元后:'</span>])</span><br><span class="line">    <span class="built_in">disp</span>(A);</span><br><span class="line">    </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">%%回代结果</span></span><br><span class="line">x=<span class="built_in">zeros</span>(<span class="built_in">length</span>(b),<span class="number">1</span>);  </span><br><span class="line">x(n)=A(n,c)/A(n,n);</span><br><span class="line"><span class="keyword">for</span> k=n<span class="number">-1</span>:<span class="number">-1</span>:<span class="number">1</span></span><br><span class="line">    x(k)=(A(k,c)-A(k,k+<span class="number">1</span>:n)*x(k+<span class="number">1</span>:n))/A(k,k);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%显示计算结果</span></span><br><span class="line"><span class="built_in">disp</span>(<span class="string">'x='</span>);</span><br><span class="line"><span class="built_in">disp</span>(x);</span><br></pre></td></tr></table></figure>
+<h3 id="Matlab逆矩阵求解"><a href="#Matlab逆矩阵求解" class="headerlink" title="Matlab逆矩阵求解"></a>Matlab逆矩阵求解</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A = [<span class="number">3.01</span>,<span class="number">6.03</span>,<span class="number">1.96</span>; <span class="number">1.348</span>,<span class="number">6.65</span>,<span class="number">0.002</span>; <span class="number">1.47</span>, <span class="number">-4.81</span>,<span class="number">9.34</span>];</span><br><span class="line">b = [<span class="number">11</span>,<span class="number">8</span>,<span class="number">6</span>]';</span><br><span class="line">x = inv(A)*b;</span><br><span class="line"><span class="built_in">disp</span>(x);</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Matlab/" rel="tag"># Matlab</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/12/%E5%B7%A5%E5%85%B7/word%E4%B8%AD%E6%8F%92%E5%85%A5%E4%BB%A3%E7%A0%81/" rel="prev" title="工具/word中插入代码">
+      <i class="fa fa-chevron-left"></i> 工具/word中插入代码
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/13/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%BA%8C/" rel="next" title="计算方法实验/实验二">
+      计算方法实验/实验二 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实验一"><span class="nav-number">1.</span> <span class="nav-text">实验一</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解线性方程组的高斯消去法与高斯列主元消去法"><span class="nav-number">1.1.</span> <span class="nav-text">解线性方程组的高斯消去法与高斯列主元消去法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#高斯消去法"><span class="nav-number">1.1.1.</span> <span class="nav-text">高斯消去法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高斯列主元消去法"><span class="nav-number">1.1.2.</span> <span class="nav-text">高斯列主元消去法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Matlab逆矩阵求解"><span class="nav-number">1.1.3.</span> <span class="nav-text">Matlab逆矩阵求解</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="MingKai Luo"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">MingKai Luo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MingKai Luo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">86k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:18</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"MGgbWxtQ2nM3r8voLDOndkxD-gzGzoHsz","app_key":"wIYqHCMKC9xFHUxz3G48FlRo","server_url":null,"security":false,"betterPerformance":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'MGgbWxtQ2nM3r8voLDOndkxD-gzGzoHsz',
+      appKey     : 'wIYqHCMKC9xFHUxz3G48FlRo',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : 'mkco.xyz# When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)'
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
