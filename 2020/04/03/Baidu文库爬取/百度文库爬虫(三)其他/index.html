@@ -20,13 +20,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"m010k.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="实现对百度文库DOC&#x2F;PDF&#x2F;XLS文档的原格式下载">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Baidu文库爬取&#x2F;百度文库爬虫(三)其他">
-<meta property="og:url" content="http://github.com/M010K/m010k.github.io/2020/04/03/Baidu%E6%96%87%E5%BA%93%E7%88%AC%E5%8F%96/%E7%99%BE%E5%BA%A6%E6%96%87%E5%BA%93%E7%88%AC%E8%99%AB(%E4%B8%89)%E5%85%B6%E4%BB%96/index.html">
+<meta property="og:url" content="http://m010k.github.io/2020/04/03/Baidu%E6%96%87%E5%BA%93%E7%88%AC%E5%8F%96/%E7%99%BE%E5%BA%A6%E6%96%87%E5%BA%93%E7%88%AC%E8%99%AB(%E4%B8%89)%E5%85%B6%E4%BB%96/index.html">
 <meta property="og:site_name" content="M010K">
 <meta property="og:description" content="实现对百度文库DOC&#x2F;PDF&#x2F;XLS文档的原格式下载">
 <meta property="og:locale" content="zh_CN">
@@ -50,7 +50,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/M010K/Typora@master/uPic/20200405-%E7%99%BE%E5%BA%A6%E6%96%87%E5%BA%93dox%E6%96%87%E6%A1%A3%E6%88%AA%E5%9B%BE.png">
 
-<link rel="canonical" href="http://github.com/M010K/m010k.github.io/2020/04/03/Baidu%E6%96%87%E5%BA%93%E7%88%AC%E5%8F%96/%E7%99%BE%E5%BA%A6%E6%96%87%E5%BA%93%E7%88%AC%E8%99%AB(%E4%B8%89)%E5%85%B6%E4%BB%96/">
+<link rel="canonical" href="http://m010k.github.io/2020/04/03/Baidu%E6%96%87%E5%BA%93%E7%88%AC%E5%8F%96/%E7%99%BE%E5%BA%A6%E6%96%87%E5%BA%93%E7%88%AC%E8%99%AB(%E4%B8%89)%E5%85%B6%E4%BB%96/">
 
 
 <script id="page-configurations">
@@ -183,7 +183,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://github.com/M010K/m010k.github.io/2020/04/03/Baidu%E6%96%87%E5%BA%93%E7%88%AC%E5%8F%96/%E7%99%BE%E5%BA%A6%E6%96%87%E5%BA%93%E7%88%AC%E8%99%AB(%E4%B8%89)%E5%85%B6%E4%BB%96/">
+    <link itemprop="mainEntityOfPage" href="http://m010k.github.io/2020/04/03/Baidu%E6%96%87%E5%BA%93%E7%88%AC%E5%8F%96/%E7%99%BE%E5%BA%A6%E6%96%87%E5%BA%93%E7%88%AC%E8%99%AB(%E4%B8%89)%E5%85%B6%E4%BB%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -280,7 +280,7 @@
 <p>下载部分文档可能会存在少数格式错误，请谅解</p>
 </blockquote>
 <p><strong>文章较长，如果需要代码话请直接移步最后（别忘了需要的依赖🧐）</strong></p>
-<p><strong>或者前往github获取全部代码</strong>：<a href="https://github.com/M010K/BauduWenkuSpider">BauduWenkuSpider</a></p>
+<p><strong>或者前往github获取全部代码</strong>：<a href="https://github.com/M010K/BauduWenkuSpider" target="_blank" rel="noopener">BauduWenkuSpider</a></p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本项目是基于python实现对百度文库可预览文档的下载,实现了对以下文档格式的下载：</p>
 <ul>
 <li>doc/docx</li>
